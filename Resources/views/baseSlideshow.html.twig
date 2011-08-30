@@ -88,5 +88,10 @@
 
   {% endblock %}
 
+  {% if testRun|default(false) %}
+    <div class="dakInfoScreenTestRun">
+      <span>This is just a test run! <br />Please use the assigned screen.</span>
+    </div>
+  {% endif %}
  </body>
 </html>
