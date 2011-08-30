@@ -189,13 +189,13 @@ var eventApp;
 
 				console.log("queryParams", queryParams);
 
-				t.loadEvents(queryParams, function (data) {
-					t.addEventsToList(data, (i == 0) ? true : false, elems.eq(i));
+				t.loadEvents(queryParams, async, function (data, index) {
+					t.addEventsToList(data, (index == 0) ? true : false, elems.eq(index));
 
 					if ($.isFunction(callback)) {
 						callback();
 					}
-				}, async);
+				}, i);
 			}
 		},
 
@@ -222,7 +222,7 @@ var eventApp;
 			}
 		},
 		
-		loadEvents : function (queryParams, callback, async) {
+		loadEvents : function (queryParams, async, callback, callbackArguments) {
 			var t = this;
 			t.loading(true);
 
@@ -243,7 +243,7 @@ var eventApp;
 
 					console.log('GOT RESPONSE! ' + json.count + ' elements');
 
-					callback(json);
+					callback(json, callbackArguments);
 					t.loading(false);
 				},
 				error: function (xhr, textStatus, errorThrown) {
@@ -334,3 +334,4 @@ $(document).ready(function () {
 		cycleControl();
 	}
 });
+
