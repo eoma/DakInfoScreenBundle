@@ -58,7 +58,7 @@ class SlideSourceController extends Controller
      * Finds and runs a slideshow.
      *
      * @Route("/{id}/run", name="slidesource_run")
-     * @Template("DakInfoScreenBundle:Screen:run.html.twig")
+     * @Template()
      */
     public function runAction($id)
     {

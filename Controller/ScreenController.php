@@ -40,20 +40,27 @@ class ScreenController extends Controller
     /**
      * Finds and displays a Screen entity.
      *
-     * @Route("/{id}/show", name="screen_show")
+     * @Route("/{id}", name="screen_show")
+     * @Route("/n/{slug}", name="screen_show_slug")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($id = 0, $slug = null)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('DakInfoScreenBundle:Screen')->find($id);
+		$slug = trim($slug);
+
+		if ($id > 0) {
+			$entity = $em->getRepository('DakInfoScreenBundle:Screen')->find($id);
+		} else if (strlen($slug) > 0) {
+			$entity = $em->getRepository('DakInfoScreenBundle:Screen')->findOneBy(array('slug' => $slug));
+		}
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Screen entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($entity->getId());
 
         return array(
             'entity'      => $entity,
@@ -64,13 +71,20 @@ class ScreenController extends Controller
      * Finds and runs a Screen slideshow.
      *
      * @Route("/{id}/run", name="screen_run")
+     * @Route("/n/{slug}/run", name="screen_run_slug")
      * @Template()
      */
-    public function runAction($id)
+    public function runAction($id = 0, $slug = null)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('DakInfoScreenBundle:Screen')->find($id);
+		$slug = trim($slug);
+
+		if ($id > 0) {
+			$entity = $em->getRepository('DakInfoScreenBundle:Screen')->find($id);
+		} else if (strlen($slug) > 0) {
+			$entity = $em->getRepository('DakInfoScreenBundle:Screen')->findOneBy(array('slug' => $slug));
+		}
 
 		$forceReload = $em->getRepository('DakInfoScreenBundle:Settings')->findOneBy(array('name' => 'forceScreenReload'));
 
@@ -81,7 +95,7 @@ class ScreenController extends Controller
         return array(
             'screen'      => $entity,
             'slideSource' => $entity->getSlideSource(),
-            'checkReloadUrl' => $this->get('router')->generate('screen_reload', array('id' => $id, 'currentInstanceTimestamp' => time()), true),
+            'checkReloadUrl' => $this->get('router')->generate('screen_reload', array('id' => $entity->getId(), 'currentInstanceTimestamp' => time()), true),
             'screenType' => $entity->getScreenType(),
             'extraCss' => $entity->getSlideSource()->getExtraCss(),
             'scalingAllowed' => $entity->isScalingAllowed() ? 'true' : 'false',
