@@ -18,6 +18,10 @@
             <th>Description</th>
             <td>{{ entity.description }}</td>
         </tr>
+        <tr>
+            <th>Slide source</th>
+            <td><a href="{{ path('slidesource_show', { 'id' : entity.slideSource.id }) }}">{{ entity.slideSource.name }}</a></td>
+        </tr>
     </tbody>
 </table>
 
@@ -33,7 +37,7 @@
         </a>
     </li>
     <li>
-        <a href="{{ path('screen_run', { 'id': entity.id }) }}">
+        <a href="{{ path('screen_run_slug', { 'slug': entity.slug }) }}">
             Run
         </a>
     </li>
