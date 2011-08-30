@@ -1,0 +1,42 @@
+section.pictureCollection {
+	background-color: #000;
+	border: none;
+}
+
+section.pictureCollection > img {
+	position: absolute;
+
+	border: none;
+
+	-moz-transition: opacity 350ms ease 0s;
+	-webkit-transition: opacity 350ms ease 0s;
+	-ms-transition: opacity 350ms ease 0s;
+	transition: opacity 350ms ease 0s;
+}
+
+.s600x800 section.pictureCollection > img {
+/*	max-height: 800px;
+	max-width: 600px;*/
+}
+
+.s1600x900 section.pictureCollection > img {
+/*	max-height: 900px;
+	max-width: 1600px;*/
+}
+
+.s900x1600 section.pictureCollection > img {
+/*	max-height: 1600px;
+	max-width: 900px;*/
+}
+
+section.pictureCollection > img {
+	opacity: 0;
+}
+
+section.pictureCollection > img[aria-selected] {
+	opacity: 1;
+}
+
+section.pictureCollection > img[aria-selected] ~ img {
+	opacity: 0;
+}

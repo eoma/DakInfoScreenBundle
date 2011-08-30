@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+{% block title %}DAK InfoScreen{% endblock %}
+
+{% block body %}
+<h1>{{ block('title') }}</h1>
+
+<p>Check out <a href="{{ path("screen") }}">screens</a> and <a href="{{ path("slidesource") }}">slide sources</a>.</p>
+
+{% endblock %}

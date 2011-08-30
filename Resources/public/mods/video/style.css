@@ -1,0 +1,8 @@
+
+section.video {
+	background-color: #000;
+}
+
+section.video video {
+	position: absolute;
+}

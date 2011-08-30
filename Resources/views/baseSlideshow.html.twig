@@ -1,0 +1,92 @@
+
+{% macro bAsset(relativeUrl) %}
+{% set relativeUrl = 'bundles/dakinfoscreen/' ~ relativeUrl %}
+{{ asset(relativeUrl) }}
+{% endmacro %}
+
+{# import 'DakInfoScreenBundle::macros.twig' as m #}
+
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>{% block title %}The Title Of Your Presentation{% endblock %}</title>
+
+  <!-- *****************  DZSlides CORE 2.0b1 *************************** -->
+  <!-- *********************************************************************** -->
+  <!-- *********************************************************************** -->
+  <!-- *********************************************************************** -->
+  <!-- *********************************************************************** -->
+
+  <!-- Default Style -->
+  <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('css/default.css') }}" />
+
+  <!-- Your Style -->
+  <!-- Define the style of you presentation -->
+
+  <!-- Maybe a font from http://www.google.com/webfonts ? -->
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+
+  <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('css/style.css') }}" />
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ _self.bAsset('js/jquery.tmpl.min.js') }}"></script>
+
+  <script type="text/javascript" src="{{ _self.bAsset('js/controls.js') }}"></script>
+  <script type="text/javascript" src="{{ _self.bAsset('js/slideControls.js') }}"></script>
+
+<!--  <script type="text/javascript" src="{{ _self.bAsset('extra/jwplayer/jwplayer.js') }}"></script>
+  <script type="text/javascript">
+
+  </script> -->
+
+  <!-- Extra modules -->
+
+  <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('mods/eventCollection/style.css') }}" />
+  <script type="text/javascript" src="{{ _self.bAsset('mods/eventCollection/eventCollection.js') }}"></script>
+
+  <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('mods/pictureCollection/style.css') }}" />
+  <script type="text/javascript" src="{{ _self.bAsset('mods/pictureCollection/pictureCollection.js') }}"></script>
+
+  <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('mods/video/style.css') }}" />
+  <script type="text/javascript" src="{{ _self.bAsset('mods/video/video.js') }}"></script>
+
+  <script type="text/javascript">
+   var checkReloadUrl = "{{ checkReloadUrl|default() }}";
+  </script>
+
+  <script type="text/javascript" src="{{ _self.bAsset('js/app.js') }}"></script>
+
+  <style type="text/css">{{ extraCss | default() | raw }}</style>
+ </head>
+ <body id="slides" data-default-slide-duration="5000" class="{{ screenType | default() }}" data-scaling-allowed="{{ scalingAllowed | default('true') }}">
+  <!-- Your Slides -->
+  <!-- One section is one slide -->
+
+  <!--<section data-duration="1000">
+   <h1>This should only last 1 second</h1>
+  </section>
+ 
+  <section class="pictureCollection">
+   <img src="http://placekitten.com/800/600" />
+   <img src="http://placekitten.com/800/500" />
+  </section>
+
+  <div id="putEventSlidesHere" display="display: none"></div>
+
+  <section data-duration="700">
+   <h1>This should only last 700 milli seconds</h1>
+  </section>-->
+
+  {% block slides %}
+
+   <section>
+    <h1>Example slide.</h1>
+    <h2>Please put up a slide :)</h2>
+   </section>
+
+  {% endblock %}
+
+ </body>
+</html>

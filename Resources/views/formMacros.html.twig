@@ -1,0 +1,7 @@
+
+{% macro form_row (formelem, label, widgetAttr) %}
+<tr>
+  <th>{{ form_label(formelem, label|default(null)) }}</th>
+  <td>{{ form_widget(formelem, {'attr': widgetAttr|default(null) }) }}</td>
+</td>
+{% endmacro %}

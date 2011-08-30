@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+{% block title %}Screen creation{% endblock %}
+
+{% import 'DakInfoScreenBundle::formMacros.html.twig' as f %}
+
+{% block body %}
+<h1>Screen creation</h1>
+
+<form action="{{ path('screen_create') }}" method="post" {{ form_enctype(form) }}>
+
+  {{form_errors(form)}}
+
+  <table>
+    {{f.form_row(form.name)}}
+    {{f.form_row(form.description, null, {'cols': 50, 'rows': 5})}}
+    {{f.form_row(form.slideSource, "Slide source")}}
+    {{f.form_row(form.screenType, "Screen type")}}
+    {{f.form_row(form.scalingAllowed, "Should scaling be allowed?")}}
+  </table>
+
+  {{ form_rest(form) }}
+
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('screen') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

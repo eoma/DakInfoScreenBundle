@@ -1,0 +1,52 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+details {
+	display: none;
+}
+
+body {
+	width: 800px; height: 600px;
+	margin-left: -400px; margin-top: -300px;
+	position: absolute; top: 50%; left: 50%;
+	overflow: hidden;
+}
+
+body.s600x800 {
+	width: 600px; height: 800px;
+	margin-left: -300px; margin-top: -400px;
+}
+
+body.s1600x900 {
+	width: 1600px; height: 900px;
+	margin-left: -800px; margin-top: -450px;
+}
+
+body.s900x1600 {
+	width: 900px; height: 1600px;
+	margin-left: -450px; margin-top: -800px;
+}
+
+html {
+	overflow: hidden;
+}
+
+section {
+	position: absolute;
+	pointer-events: none;
+	width: 100%; height: 100%;
+}
+
+section[aria-selected] {
+	pointer-events: auto;
+}
+
+body {
+	display: none
+}
+
+body.loaded {
+	display: block
+}

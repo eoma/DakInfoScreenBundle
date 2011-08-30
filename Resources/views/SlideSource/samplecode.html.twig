@@ -1,0 +1,29 @@
+<h2>Example slide code</h2>
+
+<p>
+Each slide is defined as a section element. Each have a specific duration i milliseconds (be careful).
+</p>
+
+<p> The CSS class <code>pictureCollection</code> and <code>eventCollection</code> are special classes used to
+identify that a slide is supposed to be controlled by a javascript module. The <code>eventCollection</code> class
+follows a specific format defined in <a href="{{ asset('bundles/dakinfoscreen/mods/eventCollection/eventCollection.js') }}">{{ asset('bundles/dakinfoscreen/mods/eventCollection/eventCollection.js') }}</a>
+</p>
+
+<pre>{% filter escape %}
+
+<section data-duration="1000">
+  <h1>This should only last 1 second</h1>
+</section>
+ 
+<section class="pictureCollection">
+  <img src="http://placekitten.com/800/600" />
+  <img src="http://placekitten.com/800/500" />
+</section>
+
+<div id="putEventSlidesHere" display="display: none"></div>
+
+<section data-duration="700">
+  <h1>This should only last 700 milli seconds</h1>
+</section>
+{% endfilter %}
+</pre>

@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+{% block title %}Screen edit{% endblock %}
+
+{% import 'DakInfoScreenBundle::formMacros.html.twig' as f %}
+
+{% block body %}
+<h1>Screen edit</h1>
+
+<form action="{{ path('screen_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{form_errors(edit_form)}}
+
+  <table>
+    {{f.form_row(edit_form.name)}}
+    {{f.form_row(edit_form.description, null, {'cols': 50, 'rows': 5})}}
+    {{f.form_row(edit_form.slideSource, "Slide source")}}
+    {{f.form_row(edit_form.screenType, "Screen type")}}
+    {{f.form_row(edit_form.scalingAllowed, "Should scaling be allowed?")}}
+  </table>
+
+    {{ form_rest(edit_form) }}
+
+    <p>
+        <button type="submit">Edit</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('screen') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('screen_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

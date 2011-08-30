@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+{% block title %}SlideSource list{% endblock %}
+
+{% block body %}
+<h1>SlideSource list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>Screens</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('slidesource_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+            <td>{{ entity.createdAt | date }}</td>
+            <td>{{ entity.updatedAt | date }}</td>
+            <td>
+             {% for screen in entity.screens %}
+               <a href="{{ url('screen_show', {'id' : screen.id}) }}">{{ screen }}</a>,
+             {% else %}
+               Ingen skjermer koblet til.
+             {% endfor %}
+            </td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('slidesource_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('slidesource_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('slidesource_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+{% endblock %}

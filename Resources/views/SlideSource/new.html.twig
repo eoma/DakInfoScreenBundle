@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}SlideSource creation{% endblock %}
+
+{% import 'DakInfoScreenBundle::formMacros.html.twig' as f %}
+
+{% block body %}
+<h1>SlideSource creation</h1>
+
+<form class="slideForm" action="{{ path('slidesource_create') }}" method="post" {{ form_enctype(form) }}>
+
+    <table>
+      {{ f.form_row(form.name) }}
+	  {{ f.form_row(form.content, null, {'cols': 60, 'rows': 10}) }}
+      {{ f.form_row(form.extraCss, "Extra CSS", {'cols': 60, 'rows': 10}) }}
+	</table>
+
+    {{ form_rest(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('slidesource') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+
+{% include 'DakInfoScreenBundle:SlideSource:samplecode.html.twig' %}
+
+{% endblock %}

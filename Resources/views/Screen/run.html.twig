@@ -1,0 +1,7 @@
+{% extends 'DakInfoScreenBundle::baseSlideshow.html.twig' %}
+
+{% block title %}{{ screen.name }}{% endblock %}
+
+{% block slides %}
+  {{ slideSource.content | raw }}
+{% endblock %}
