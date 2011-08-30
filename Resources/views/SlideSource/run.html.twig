@@ -1,0 +1,9 @@
+{% extends 'DakInfoScreenBundle::baseSlideshow.html.twig' %}
+
+{% block title %}Test run of {{ slideSource.name }}{% endblock %}
+
+{% set testRun = true %}
+
+{% block slides %}
+  {{ slideSource.content | raw }}
+{% endblock %}
