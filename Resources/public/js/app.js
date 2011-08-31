@@ -10,8 +10,12 @@ function formatDate(dateString) {
 
   var date = new Date();
   date.setFullYear(year);
-  date.setMonth(month);
-  date.setDate(day);
+  date.setMonth(month, day);
+  //date.setDate(day);
+
+  console.log('year', year, dateComponent[0], 'month', month, dateComponent[1], 'day', day, dateComponent[2]);
+
+  console.log('date', date);
 
   return days[date.getDay()] + ' ' + day + '. '+ months[month] + ' ' + year;
 }
