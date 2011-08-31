@@ -24,7 +24,7 @@
              {% for screen in entity.screens %}
                <a href="{{ url('screen_show', {'id' : screen.id}) }}">{{ screen }}</a>,
              {% else %}
-               Ingen skjermer koblet til.
+               No screens attached.
              {% endfor %}
             </td>
             <td>

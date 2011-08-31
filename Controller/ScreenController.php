@@ -40,7 +40,7 @@ class ScreenController extends Controller
     /**
      * Finds and displays a Screen entity.
      *
-     * @Route("/{id}", name="screen_show")
+     * @Route("/{id}", name="screen_show", requirements={"id" = "\d+"})
      * @Route("/n/{slug}", name="screen_show_slug")
      * @Template()
      */
@@ -54,6 +54,8 @@ class ScreenController extends Controller
 			$entity = $em->getRepository('DakInfoScreenBundle:Screen')->find($id);
 		} else if (strlen($slug) > 0) {
 			$entity = $em->getRepository('DakInfoScreenBundle:Screen')->findOneBy(array('slug' => $slug));
+		} else {
+			$entity = false;
 		}
 
         if (!$entity) {
@@ -70,7 +72,7 @@ class ScreenController extends Controller
     /**
      * Finds and runs a Screen slideshow.
      *
-     * @Route("/{id}/run", name="screen_run")
+     * @Route("/{id}/run", name="screen_run", requirements={"id" = "\d+"})
      * @Route("/n/{slug}/run", name="screen_run_slug")
      * @Template()
      */
@@ -84,6 +86,8 @@ class ScreenController extends Controller
 			$entity = $em->getRepository('DakInfoScreenBundle:Screen')->find($id);
 		} else if (strlen($slug) > 0) {
 			$entity = $em->getRepository('DakInfoScreenBundle:Screen')->findOneBy(array('slug' => $slug));
+		} else {
+			$entity = false;
 		}
 
 		$forceReload = $em->getRepository('DakInfoScreenBundle:Settings')->findOneBy(array('name' => 'forceScreenReload'));
@@ -106,7 +110,7 @@ class ScreenController extends Controller
     /**
      * Checks if it is necessary to reload the screen Screen slideshow.
      *
-     * @Route("/{id}/reload/{currentInstanceTimestamp}", name="screen_reload" )
+     * @Route("/{id}/reload/{currentInstanceTimestamp}", name="screen_reload", requirements={"id" = "\d+", "currentInstanceTimestamp" = "\d+"} )
      */
     public function reloadAction($id, $currentInstanceTimestamp)
     {
