@@ -19,6 +19,16 @@ body.vertical {
 	margin-left: -300px; margin-top: -400px;
 }
 
+body.s1024x768 {
+	width: 1024px; height: 768px;
+	margin-left: -512px; margin-top: -384px;
+}
+
+body.s1024x768.vertical {
+	width: 768px; height: 1024px;
+	margin-left: -384px; margin-top: -512px;
+}
+
 body.s1600x900 {
 	width: 1600px; height: 900px;
 	margin-left: -800px; margin-top: -450px;

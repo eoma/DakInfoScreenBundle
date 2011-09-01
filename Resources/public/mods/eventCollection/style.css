@@ -21,6 +21,14 @@ body.vertical .eventsInCollection {
 	width: 400px;
 }
 
+body.s1024x768 .eventsInCollection {
+	width: 640px;
+}
+
+body.s1024x768.vertical .eventsInCollection {
+	width: 512px;
+}
+
 body.s1600x900 .eventsInCollection {
 	width: 1200px;
 }
@@ -37,6 +45,14 @@ body.s1600x900.vertical .eventsInCollection {
 
 body.vertical .eventsInCollection > article {
 	width: 380px;
+}
+
+body.s1024x768 .eventsInCollection > article {
+	width: 614px;
+}
+
+body.s1024x768.vertical .eventsInCollection > article {
+	width: 486px;
 }
 
 body.s1600x900 .eventsInCollection > article {
@@ -80,6 +96,16 @@ ul.eventRibbon {
 
 body.vertical ul.eventRibbon {
 	left: 400px;
+	font-size: 0.55em;
+}
+
+body.s1024x768 ul.eventRibbon {
+	left: 640px;
+	font-size: 0.65em;
+}
+
+body.s1024x768.vertical ul.eventRibbon {
+	left: 512px;
 	font-size: 0.55em;
 }
 

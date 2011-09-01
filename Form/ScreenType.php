@@ -16,6 +16,8 @@ class ScreenType extends AbstractType
               'choices' => array(
                 '' => '4:3 format (800x600), horisontalt',
                 's800x600 vertical' => '4:3 format (800x600), vertikalt',
+                's1024x768' => '4:3 format (1024x768), horisontalt',
+                's1024x768 vertical' => '4:3 format (1024x768), vertikalt',
                 's1600x900' => '16:9 format (1600x900), horisontalt',
                 's1600x900 vertical' => '16:9 format (1600x900), vertikalt',
 
