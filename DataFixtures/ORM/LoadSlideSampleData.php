@@ -32,7 +32,7 @@ class LoadSlideSampleData extends AbstractFixture implements OrderedFixtureInter
   <h1>Events!</h1>
 </section>
 
-<div id=\"putEventSlidesHere\" style=\"display: none\"></div>
+<div class=\"eventSlideTrigger\" data-dayspan=\"6\"></div>
 ");
 
         $manager->persist($slideSource2);
