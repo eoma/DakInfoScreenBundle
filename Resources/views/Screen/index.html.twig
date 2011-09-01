@@ -6,7 +6,7 @@
 
 <p>
  <strong>Last forced screen reload:</strong> {{ forceReload | default(0) | date }}.
- <a href="{{ path('screen_force_reload') }}">Force new screen reload.</a>
+ <a href="{{ path('screen_force_reload') }}">Force reload of all screens.</a>
 </p>
 
 <table class="records_list">
@@ -14,27 +14,20 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
-            <th>Slide Source</th>
+            <th>Active slideshow</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('screen_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+            <td><a href="{{ path('screen_edit', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
             <td>{{ entity.description }}</td>
             <td><a href="{{ path('slidesource_show', {'id' : entity.slideSource.id }) }}">{{ entity.slideSource }}</a></td>
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('screen_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
                         <a href="{{ path('screen_run_slug', { 'slug': entity.slug }) }}">run</a>
-                    </li>
-
-                    <li>
-                        <a href="{{ path('screen_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
             </td>
@@ -46,7 +39,7 @@
 <ul>
     <li>
         <a href="{{ path('screen_new') }}">
-            Create a new entry
+            Create a new screen
         </a>
     </li>
 </ul>

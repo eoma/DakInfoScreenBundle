@@ -8,17 +8,15 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>Created at</th>
             <th>Updated at</th>
-            <th>Screens</th>
+            <th>Attached screens</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('slidesource_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
-            <td>{{ entity.createdAt | date }}</td>
+            <td><a href="{{ path('slidesource_edit', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
             <td>{{ entity.updatedAt | date }}</td>
             <td>
              {% for screen in entity.screens %}
@@ -30,13 +28,7 @@
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('slidesource_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('slidesource_run', { 'id': entity.id }) }}">run</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('slidesource_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('slidesource_run', { 'id': entity.id }) }}">test run</a>
                     </li>
                 </ul>
             </td>
@@ -48,7 +40,7 @@
 <ul>
     <li>
         <a href="{{ path('slidesource_new') }}">
-            Create a new entry
+            Create a new slideshow
         </a>
     </li>
 </ul>
