@@ -17,7 +17,7 @@ body.s1600x900 section.eventCollection > h1 {
 	position: relative;
 }
 
-body.s600x800 .eventsInCollection {
+body.vertical .eventsInCollection {
 	width: 400px;
 }
 
@@ -25,7 +25,7 @@ body.s1600x900 .eventsInCollection {
 	width: 1200px;
 }
 
-body.s900x1600 .eventsInCollection {
+body.s1600x900.vertical .eventsInCollection {
 	width: 600px;
 }
 
@@ -35,7 +35,7 @@ body.s900x1600 .eventsInCollection {
 	font-size: 0.9em;
 }
 
-body.s600x800 .eventsInCollection > article {
+body.vertical .eventsInCollection > article {
 	width: 380px;
 }
 
@@ -43,7 +43,7 @@ body.s1600x900 .eventsInCollection > article {
 	width: 1180px;
 }
 
-body.s900x1600 .eventsInCollection > article {
+body.s1600x900.vertical .eventsInCollection > article {
 	width: 580px;
 }
 
@@ -78,7 +78,7 @@ ul.eventRibbon {
 	margin-left: 20px;
 }
 
-body.s600x800 ul.eventRibbon {
+body.vertical ul.eventRibbon {
 	left: 400px;
 	font-size: 0.55em;
 }
@@ -88,7 +88,7 @@ body.s1600x900 ul.eventRibbon {
 	font-size: 0.7em;
 }
 
-body.s900x1600 ul.eventRibbon {
+body.s1600x900.vertical ul.eventRibbon {
 	left: 600px;
 	font-size: 0.6em;
 }

@@ -14,7 +14,7 @@ body {
 	overflow: hidden;
 }
 
-body.s600x800 {
+body.vertical {
 	width: 600px; height: 800px;
 	margin-left: -300px; margin-top: -400px;
 }
@@ -24,7 +24,7 @@ body.s1600x900 {
 	margin-left: -800px; margin-top: -450px;
 }
 
-body.s900x1600 {
+body.s1600x900.vertical {
 	width: 900px; height: 1600px;
 	margin-left: -450px; margin-top: -800px;
 }
