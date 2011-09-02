@@ -3,17 +3,20 @@ var pictureCollection = {
 	images : null,
 	activeImage : null,
 	activeImageRef : null,
+	intialized : false,
 
-	identifySlide : function (slide) {
+	getName : function () {
+		return "pictureCollection";
+	},
+
+	initialize : function () {
 		var t = this;
-		// Return true or false
-		// will take control if true
-		if (slide.hasClass('pictureCollection')) {
-			t.slide = slide;
 
-			t.images = t.slide.find('img');
+		if ( ! t.initialized ) {
 
-			if(t.images.length == 0) {
+			var images = jQuery(".pictureCollection > img");
+
+			if(images.length == 0) {
 				return false;
 			}
 
@@ -24,8 +27,8 @@ var pictureCollection = {
 
 			console.log('bodyRatio', bodyRatio);
 
-			for (var i = 0; i < t.images.length; i++) {
-				var image = t.images.eq(i);
+			for (var i = 0; i < images.length; i++) {
+				var image = images.eq(i);
 				var imageHeight = parseInt(image.css('height').replace('px', ''), 10);
 				var imageWidth = parseInt(image.css('width').replace('px', ''), 10);
 
@@ -58,6 +61,18 @@ var pictureCollection = {
 
 				image = null;
 			}
+
+			images = null;
+		}
+	},
+
+	identifySlide : function (slide) {
+		var t = this;
+		// Return true or false
+		// will take control if true
+		if (slide.hasClass('pictureCollection')) {
+			t.slide = slide;
+			t.images = t.slide.find('img');
 
 			return true;
 		} else {
@@ -101,7 +116,7 @@ var pictureCollection = {
 		t.activeImageRef = 0;
 		t.images = null;
 		
-		console.log('module eventCollection unbound');
+		console.log('module ' + t.getName() + ' unbound');
 		
 		t = null;
 	}

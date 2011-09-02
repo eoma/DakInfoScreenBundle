@@ -1,8 +1,52 @@
-var eventSlideCollection = {
+var eventCollection = {
 	currentEvent : null,
 	currentEventRef : 0,
 	eventReferences : [],
 	slide : null,
+
+	initialized : false,
+	slideRuns : 0,
+	eventSlideTriggerExists : false,
+
+	initialize : function () {
+		var t = this;
+		// To be used at every start of a new slide cycle.
+
+		if ( ! t.initialized ) {
+			t.initialized = true;
+
+			eventApp.init();
+
+			/*eventApp.state.limit = 10;*/
+			/*eventApp.state.filter.dayspan = 7;*/
+			eventApp.state.filter.onlySummaries = 1;
+
+			if ($('.eventSlideTrigger').length > 0) {
+				eventApp.refresh(null, false);
+				t.eventSlideTriggerExists = true;
+			} else {
+				return false;
+			}
+		} else {
+
+			console.log("t.eventSlideTriggerExists", t.eventSlideTriggerExists);
+
+			if ( ! t.eventSlideTriggerExists ) return false;
+
+			if (t.slideRuns > 1) {
+				t.slideRuns = 0;
+
+				console.log("Will refresh events");
+				eventApp.refresh(null, false);
+			}
+
+			t.slideRuns++;
+		}
+	},
+
+	getName : function () {
+		return "eventCollection";
+	},
 
 	identifySlide : function (slide) {
 		var t = this;
@@ -41,7 +85,7 @@ var eventSlideCollection = {
 		t.currentEventRef = 0;
 		t.eventReferences = [];
 		
-		console.log('module eventCollection unbound');
+		console.log('module ' + t.getName() + ' unbound from slide');
 	},
 
 	nextEvent : function () {
@@ -54,7 +98,7 @@ var eventSlideCollection = {
 			previousEvent = t.currentEvent;
 		}
 
-		console.log('t.currentEventRef', t.currentEventRef, 't.eventReferences.length', t.eventReferences.length);
+		//console.log('t.currentEventRef', t.currentEventRef, 't.eventReferences.length', t.eventReferences.length);
 
 		t.currentEvent = t.eventReferences[t.currentEventRef];
 
@@ -66,14 +110,14 @@ var eventSlideCollection = {
 			t.currentEventRef++;
 		}
 
-		console.log(t.currentEvent);
+		//console.log(t.currentEvent);
 
 		if (previousEvent == null) {
-			console.log('no previous event');
+			//console.log('no previous event');
 			t.currentEvent.article.attr('aria-selected', true);
 			t.currentEvent.ribbon.attr('aria-selected', true);
 		} else {
-			console.log('have previous event');
+			//console.log('have previous event');
 			previousEvent.article.removeAttr('aria-selected');
 			previousEvent.ribbon.removeAttr('aria-selected');
 
@@ -91,7 +135,7 @@ var eventSlideCollection = {
 		var articleElements = t.slide.find('article');
 		var ribbonElements = t.slide.find('li');
 
-		console.log('will add ' + articleElements.length + ' objects to t.eventReferences');
+		//console.log('will add ' + articleElements.length + ' objects to t.eventReferences');
 
 		for (var i = 0; i < articleElements.length; i++) {
 			t.eventReferences.push({
@@ -100,7 +144,7 @@ var eventSlideCollection = {
 			});
 		}
 
-		console.log('t.eventReferences now has ' + t.eventReferences.length + ' elements');
+		//console.log('t.eventReferences now has ' + t.eventReferences.length + ' elements');
 
 		t.currentEventRef = 0;
 

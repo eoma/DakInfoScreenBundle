@@ -2,6 +2,10 @@ var video = {
 	slide : null,
 	activeVideo : null,
 
+	getName : function () {
+		return "video";
+	},
+
 	identifySlide : function (slide) {
 		var t = this;
 		// Return true or false
@@ -99,6 +103,6 @@ var video = {
 
 		t.slide = null;
 		
-		console.log('module video unbound');
+		console.log('module ' + t.getName() + ' unbound');
 	}
 };

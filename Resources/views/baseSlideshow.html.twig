@@ -44,6 +44,7 @@
   <!-- Extra modules -->
 
   <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('mods/eventCollection/style.css') }}" />
+  <script type="text/javascript" src="{{ _self.bAsset('mods/eventCollection/eventApp.js') }}"></script>
   <script type="text/javascript" src="{{ _self.bAsset('mods/eventCollection/eventCollection.js') }}"></script>
 
   <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('mods/pictureCollection/style.css') }}" />
@@ -54,6 +55,10 @@
 
   <script type="text/javascript">
    var checkReloadUrl = "{{ checkReloadUrl|default() }}";
+
+   slideControl.registerModule(eventCollection);
+   slideControl.registerModule(pictureCollection);
+   slideControl.registerModule(video);
   </script>
 
   <script type="text/javascript" src="{{ _self.bAsset('js/app.js') }}"></script>

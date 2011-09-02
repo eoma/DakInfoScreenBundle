@@ -23,10 +23,34 @@ var slideControl = {
 		t.identifySlide();
 	},
 
+	registerModule : function (moduleInstance) {
+		var t = this;
+
+		if (jQuery.isFunction(moduleInstance.getName) &&
+		    jQuery.isFunction(moduleInstance.identifySlide) &&
+			jQuery.isFunction(moduleInstance.unbind) && 
+		    jQuery.isFunction(moduleInstance.cycle)) {
+			console.log('registered module', moduleInstance.getName());
+
+			t.modules.push(moduleInstance);
+		}
+	},
+
+	initializeModules : function () {
+		var t = this;
+
+		for (var i = 0, len = t.modules.length; i < len; i++) {
+			if (jQuery.isFunction(t.modules[i].initialize)) {
+				t.modules[i].initialize();
+			}
+		}
+
+	},
+
 	identifySlide : function () {
 		var t = this;
 
-		console.log(t.modules.length);
+		//console.log(t.modules.length);
 
 		for (var i in t.modules) {
 			if (t.modules[i].identifySlide(t.currentSlide)) {
@@ -107,10 +131,10 @@ var slideControl = {
 			if (goToNextSlide && (idx >= slides.length)) callTrigger = true;
 
 			if (!callTrigger) {
-				console.log('will not call callbackWhenFinished');
+				//console.log('will not call callbackWhenFinished');
 				timeout = setTimeout(cycleTrigger, timeoutInterval);
 			} else if (callTrigger && $.isFunction(callbackWhenFinished)) {
-				console.log('callback triggered in cicle_triger');
+				//console.log('callback triggered in cycle_trigger');
 
 				if (t.activeModule != null) {
 					timeout = setTimeout(unbindThenCallback, timeoutInterval);
