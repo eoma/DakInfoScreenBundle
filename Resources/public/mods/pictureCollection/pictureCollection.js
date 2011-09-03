@@ -109,7 +109,7 @@ var pictureCollection = {
 	unbind : function () {
 		var t = this;
 
-		t.activeImage.removeAttr('aria-selected', true);
+		t.activeImage.removeAttr('aria-selected');
 
 		t.slide = null;
 		t.activeImage = null;
