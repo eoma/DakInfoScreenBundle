@@ -1,0 +1,25 @@
+section.dummy {
+	background-color: #000;
+	color: #fff;
+}
+
+section.dummy h1 {
+
+	-moz-transition: margin 700ms ease 0s, letter-spacing 700ms ease 0s;
+	-webkit-transition: margin 700ms ease 0s, letter-spacing 700ms ease 0s;
+	-ms-transition: margin 700ms ease 0s, letter-spacing 700ms ease 0s;
+	transition: margin 700ms ease 0s, letter-spacing 700ms ease 0s;
+
+	position: relative;
+	margin: 0;
+	letter-spacing: normal;
+}
+
+section.dummy[aria-selected] h1 {
+	margin: 2em 0 2em 0;
+	letter-spacing: 40px;
+}
+
+/*section.dummy h1[aria-selected] ~ h1 {
+	letter-spacing: normal;
+}*/
