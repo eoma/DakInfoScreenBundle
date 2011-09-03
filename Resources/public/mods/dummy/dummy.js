@@ -4,6 +4,8 @@
  *
  * If you require to eg. fetch some data before the slideshow starts,
  * you should provide a method called initialize.
+ *
+ * Object name should be equal to module name.
  */
 var dummy = {
 	slide : null,
@@ -12,7 +14,7 @@ var dummy = {
 	/**
 	 * Returns the name of this module. Required.
 	 * Mostly used in debugging.
-	 * 
+	 *
 	 * @return string
 	 */
 	getName : function () {
@@ -72,7 +74,7 @@ var dummy = {
 	 */
 	unbind : function () {
 		var t = this;
-		
+
 		t.slide = null;
 	}
 };
