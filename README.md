@@ -29,7 +29,7 @@ You have to register the Dak namespace in your app/autoload.php (if you download
     $loader->registerNamespaces(array(
         ...
         'Dak'              => __DIR__.'/../vendor/bundles',
-	    ...
+        ...
     ));
 
 You must then register the bundle in your app/AppKernel.php file. Paste the following snippet in the array in the registerBundles method:
@@ -49,7 +49,7 @@ This final snippet should be pasted into your app/config/config.yml file:
 
     stof_doctrine_extensions:
         orm:
-		    default:
+            default:
                 timestampable: true
                 sluggable: true
 
