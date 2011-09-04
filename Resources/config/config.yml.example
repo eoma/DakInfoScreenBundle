@@ -1,0 +1,21 @@
+dak_info_screen:
+    modules:
+        # By default the module reference the slideshow controller will use
+        # by default be the module name.
+        pictureCollection:
+            directory: bundles/dakinfoscreen/mods/pictureCollection #relative to the web root
+            style: [style.css]
+            script: [pictureCollection.js]
+            reference: "pictureCollection" # Any valid one line javascript expression, mostly a variable name will be used.
+        video:
+            directory: bundles/dakinfoscreen/mods/video #relative to the web root
+            style: [style.css]
+            script: [video.js]
+        dummy:
+            directory: bundles/dakinfoscreen/mods/dummy #relative to the web root
+            style: [style.css]
+            script: [dummy.js]
+        eventCollection:
+            directory: bundles/dakinfoscreen/mods/eventCollection #relative to the web root
+            style: [style.css]
+            script: [eventApp.js, eventCollection.js]

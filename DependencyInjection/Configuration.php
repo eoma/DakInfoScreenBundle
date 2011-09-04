@@ -18,11 +18,36 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('dak_slide');
+        $rootNode = $treeBuilder->root('dak_info_screen');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
+
+        $rootNode
+            ->children()
+                ->arrayNode('modules')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('directory')
+                                ->cannotBeEmpty()
+                            ->end()
+                            ->arrayNode('style')
+                                ->prototype('scalar')->end()
+                            ->end()
+                            ->arrayNode('script')
+                                ->prototype('scalar')->end()
+                            ->end()
+                            ->scalarNode('reference')
+                                ->cannotBeEmpty()
+                                ->defaultFalse()
+                             ->end()
+                        ->end()
+                     ->end()
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }
