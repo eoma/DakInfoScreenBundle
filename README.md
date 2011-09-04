@@ -53,7 +53,9 @@ This final snippet should be pasted into your app/config/config.yml file:
                 timestampable: true
                 sluggable: true
 
-Then you should be ready to create the database schema required for this bundle.
+You could also paste the contents of [Resources/config/config.yml.example][slideShowModuleConfiguration] if you want to enable the default slide show modules that exists in this module.
+
+You should now be ready to create the database schema required for this bundle.
 
 If you don't have any pre-existing schemas in your database:
 
@@ -71,15 +73,23 @@ Install the assets (css, js):
 
 Now it should work.
 
+Slide show modules
+------------------
+
+If you want to use the included slide show modules, you should paste the contents of [Resources/config/config.yml.example][slideShowModuleConfiguration] into your app/config/config.yml.
+
+If you want to write one yourself, you can take a peek at the modules included or just copy and rename the dummy module. All slide show modules reside in [Resources/public/mods/](https://github.com/eoma/DakInfoScreenBundle/tree/master/Resources/public/mods)
+
 Inspirations
 ------------
 
 This project draws most of its foundations from [Paul Roget's DZSlide][dzslides].
 
-It is a open source project.
+It is an open source project.
 
 [symfony2]: http://symfony.com/ "Symfony"
 [dzslides]: http://paulrouget.com/dzslides/ "DZSlides"
 [stofDoctrine]: https://github.com/stof/StofDoctrineExtensionsBundle "StofDoctrineExtensionsBundle"
 [doctrineFixtures]: http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html
 [doctrineMigrations]: http://symfony.com/doc/current/bundles/DoctrineMigrationsBundle/index.html
+[slideShowModuleconfiguration]: https://github.com/eoma/DakInfoScreenBundle/tree/master/Resources/config/config.example.yml
