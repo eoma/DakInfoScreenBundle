@@ -36,29 +36,34 @@
   <script type="text/javascript" src="{{ _self.bAsset('js/controls.js') }}"></script>
   <script type="text/javascript" src="{{ _self.bAsset('js/slideControls.js') }}"></script>
 
-<!--  <script type="text/javascript" src="{{ _self.bAsset('extra/jwplayer/jwplayer.js') }}"></script>
-  <script type="text/javascript">
-
-  </script> -->
-
   <!-- Extra modules -->
 
-  <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('mods/eventCollection/style.css') }}" />
-  <script type="text/javascript" src="{{ _self.bAsset('mods/eventCollection/eventApp.js') }}"></script>
-  <script type="text/javascript" src="{{ _self.bAsset('mods/eventCollection/eventCollection.js') }}"></script>
+  {% for moduleName, module in slideModules %}
+    <!-- start include module {{ moduleName }} -->
 
-  <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('mods/pictureCollection/style.css') }}" />
-  <script type="text/javascript" src="{{ _self.bAsset('mods/pictureCollection/pictureCollection.js') }}"></script>
+    {% for stylesheet in module.style %}
+      <link rel="stylesheet" type="text/css" href="{{ asset(module.directory ~ '/' ~ stylesheet) }}" />
+    {% endfor %}
+    {% for script in module.script %}
+      <script type="text/javascript" src="{{ asset(module.directory ~ '/' ~ script) }}"></script>
+    {% endfor %}
 
-  <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('mods/video/style.css') }}" />
-  <script type="text/javascript" src="{{ _self.bAsset('mods/video/video.js') }}"></script>
+    <!-- end include module {{ moduleName }} -->
+  {% endfor %}
 
   <script type="text/javascript">
    var checkReloadUrl = "{{ checkReloadUrl|default() }}";
 
-   slideControl.registerModule(eventCollection);
-   slideControl.registerModule(pictureCollection);
-   slideControl.registerModule(video);
+   //slideControl.registerModule(eventCollection);
+   {% for moduleName, module in slideModules %}
+
+     {% if module.reference %}
+       slideControl.registerModule({{ module.reference }})
+     {% else %}
+       slideControl.registerModule({{ moduleName }})
+     {% endif %}
+   {% endfor %}
+
   </script>
 
   <script type="text/javascript" src="{{ _self.bAsset('js/app.js') }}"></script>
@@ -68,21 +73,6 @@
  <body id="slides" data-default-slide-duration="5000" class="{{ screenType | default() }}" data-scaling-allowed="{{ scalingAllowed | default('true') }}">
   <!-- Your Slides -->
   <!-- One section is one slide -->
-
-  <!--<section data-duration="1000">
-   <h1>This should only last 1 second</h1>
-  </section>
- 
-  <section class="pictureCollection">
-   <img src="http://placekitten.com/800/600" />
-   <img src="http://placekitten.com/800/500" />
-  </section>
-
-  <div id="putEventSlidesHere" display="display: none"></div>
-
-  <section data-duration="700">
-   <h1>This should only last 700 milli seconds</h1>
-  </section>-->
 
   {% block slides %}
 
