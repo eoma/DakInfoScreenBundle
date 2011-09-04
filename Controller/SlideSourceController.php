@@ -71,6 +71,7 @@ class SlideSourceController extends Controller
         }
 
         return array(
+            'slideModules' => $this->get('dak_info_screen.module_manager')->getModules(),
             /*'screen'      => $entity,*/
             'slideSource' => $entity,
             /*'checkReloadUrl' => $this->get('router')->generate('screen_reload', array('id' => $id, 'currentInstanceTimestamp' => time()), true),*/

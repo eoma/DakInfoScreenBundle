@@ -97,6 +97,7 @@ class ScreenController extends Controller
         }
 
         return array(
+            'slideModules' => $this->get('dak_info_screen.module_manager')->getModules(),
             'screen'      => $entity,
             'slideSource' => $entity->getSlideSource(),
             'checkReloadUrl' => $this->get('router')->generate('screen_reload', array('id' => $entity->getId(), 'currentInstanceTimestamp' => time()), true),
