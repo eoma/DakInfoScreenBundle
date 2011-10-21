@@ -30,13 +30,13 @@ class Configuration implements ConfigurationInterface
                     ->useAttributeAsKey('name')
                     ->prototype('array')
                         ->children()
-                            ->scalarNode('directory')
+                            ->scalarNode('directory') // Relative to web root
                                 ->cannotBeEmpty()
                             ->end()
-                            ->arrayNode('style')
+                            ->arrayNode('style') // A list of required stylesheets for the presenter
                                 ->prototype('scalar')->end()
                             ->end()
-                            ->arrayNode('script')
+                            ->arrayNode('script') // A list of required scripts for the presenter
                                 ->prototype('scalar')->end()
                             ->end()
                             ->scalarNode('reference')
