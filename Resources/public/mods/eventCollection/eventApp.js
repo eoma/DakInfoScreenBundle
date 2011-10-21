@@ -186,7 +186,7 @@ var eventApp;
 				}
 				
 				if ((typeof elemData.festival == 'number') || (typeof elemData.festival == 'string')) {
-					queryParams.category_id = elemData.festival;
+					queryParams.festival_id = elemData.festival;
 				}
 
 				jQuery.extend(queryParams, t.state.filter);
