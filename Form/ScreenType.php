@@ -31,6 +31,6 @@ class ScreenType extends AbstractType
 
     public function getName()
     {
-        return 'dak_info_screen_screen';
+        return 'dak_info_screen_screentype';
     }
 }

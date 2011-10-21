@@ -18,6 +18,6 @@ class SlideSourceType extends AbstractType
 
     public function getName()
     {
-        return 'dak_slidebundle_slidesourcetype';
+        return 'dak_info_screen_slidesourcetype';
     }
 }
