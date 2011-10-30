@@ -30,17 +30,66 @@ function formatTime(timeString) {
   return hour + ':' + minute;
 }
 
+function getDateObject(dateString, timeString) {
+
+	var dateParts = new Array(1970, 1, 1);
+
+	if (typeof dateString == 'string') {
+		dateParts = dateString.split('-');
+	}
+
+	var timeParts = new Array(0, 0, 0);
+
+	if (typeof timeString == 'string') {
+		timeParts = timeString.split(':');
+	}
+
+	var dateObject = new Date(
+		parseInt(dateParts[0], 10),
+		parseInt(dateParts[1], 10),
+		parseInt(dateParts[2], 10),
+		parseInt(timeParts[0], 10),
+		parseInt(timeParts[1], 10),
+		parseInt(timeParts[2], 10),
+		0
+	);
+
+	console.log(dateObject);
+
+	return dateObject;
+}
+
+function groupEventsByDate(events) {
+
+	var dates = {};
+
+	for (var i = 0; i < events.length; i++) {
+		var event = events[i];
+		var date = getDateObject(event.startDate, event.startTime);
+
+		date.setTime(date.getTime() - (4 * 3600 * 1000));
+
+		var monthPadding = '';
+		if (date.getMonth() < 10) {
+			monthPadding = ' ';
+		}
+
+		var dateString = date.getFullYear() + '-' + monthPadding + date.getMonth() + '-' + date.getDate();
+
+		if (typeof(dates[dateString]) == 'undefined') {
+			dates[dateString] = new Array();
+		}
+		dates[dateString].push(i);
+	}
+
+	return dates;
+}
+
 function eventHappensNow (event) {
 	var now = new Date();
 
-	var startDateParts = event.startDate.split('-');
-	var startTimeParts = event.startTime.split(':');
-
-	var endDateParts = event.endDate.split('-');
-	var endTimeParts = event.endTime.split(':');
-
-	var start = new Date(startDateParts[0], startDateParts[1], startDateParts[2], startTimeParts[0], startTimeParts[1], startTimeParts[2], 0);
-	var end = new Date(endDateParts[0], endDateParts[1], endDateParts[2], endTimeParts[0], endTimeParts[1], endTimeParts[2], 0);
+	var start = getDateObject(event.startDate, event.startTime);
+	var end = getDateObject(event.endDate, event.endTime);
 
 	console.log('eventHappensNow', 'now >= start:', (now >= start), 'now <= end:', (now <= end));
 
@@ -115,13 +164,7 @@ var eventApp;
 				$("#slides .eventCollection").empty().remove();
 			}
 
-			var dates = {};
-			$.each(data.data, function(index) {
-				if (typeof(dates[this.startDate]) == 'undefined') {
-					dates[this.startDate] = new Array();
-				}
-				dates[this.startDate].push(index);
-			});
+			var dates = groupEventsByDate(data.data);
 
 			var dateEvents = [];
 
