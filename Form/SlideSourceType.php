@@ -11,8 +11,9 @@ class SlideSourceType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('content')
-            ->add('extraCss', 'textarea', array('required' => false))
+            ->add('content', 'hidden')
+            //->add('content', 'input', array('type' => 'hidden'))
+            //->add('extraCss', 'hidden')
         ;
     }
 

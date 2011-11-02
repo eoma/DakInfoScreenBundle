@@ -70,13 +70,15 @@ class SlideSourceController extends Controller
             throw $this->createNotFoundException('Unable to find Screen entity.');
         }
 
+		$slideData = json_decode($entity->getContent());
+
         return array(
             'slideModules' => $this->get('dak_info_screen.module_manager')->getModules(),
             /*'screen'      => $entity,*/
             'slideSource' => $entity,
+			'slideData' => $slideData,
             /*'checkReloadUrl' => $this->get('router')->generate('screen_reload', array('id' => $id, 'currentInstanceTimestamp' => time()), true),*/
             /*'screenType' => $entity->getScreenType(),*/
-            'extraCss' => $entity->getExtraCss(),
             /*'scalingAllowed' => $entity->isScalingAllowed() ? 'true' : 'false',*/
         );
     }

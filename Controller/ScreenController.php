@@ -96,13 +96,16 @@ class ScreenController extends Controller
             throw $this->createNotFoundException('Unable to find Screen entity.');
         }
 
+		$slideData = json_decode($entity->getSlideSource()->getContent());
+
         return array(
             'slideModules' => $this->get('dak_info_screen.module_manager')->getModules(),
             'screen'      => $entity,
             'slideSource' => $entity->getSlideSource(),
+            'slideData' => $slideData,
             'checkReloadUrl' => $this->get('router')->generate('screen_reload', array('id' => $entity->getId(), 'currentInstanceTimestamp' => time()), true),
             'screenType' => $entity->getScreenType(),
-            'extraCss' => $entity->getSlideSource()->getExtraCss(),
+            /*'extraCss' => $entity->getSlideSource()->getExtraCss(),*/
             'scalingAllowed' => $entity->isScalingAllowed() ? 'true' : 'false',
             'forceReload' => $forceReload->getValue(),
         );

@@ -2,20 +2,113 @@
 {% block title %}SlideSource edit{% endblock %}
 
 {% import 'DakInfoScreenBundle::formMacros.html.twig' as f %}
+{% import 'DakInfoScreenBundle::macros.html.twig' as m %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" />
+
+<style type="text/css">
+
+/* clearfix */
+/* For modern browsers */
+.cf:before,
+.cf:after {
+	content:"";
+	display:table;
+}
+
+.cf:after {
+	clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.cf {
+	zoom:1;
+}
+
+
+#contentContainer > li {
+  border: 2px solid #000;
+  margin: 0.2em;
+}
+
+#contentContainer > li > .canvas {
+  min-height: 30px;
+  background-color: #0af;
+}
+
+#contentContainer > li > .toolbar ul {
+  padding: 0;
+}
+
+#contentContainer > li > .toolbar ul.left {
+  float: left;
+}
+
+#contentContainer > li > .toolbar ul.right {
+  float: right;
+}
+
+#contentContainer > li > .toolbar ul > li {
+  display: inline-block;
+  margin: 0.2em;
+  padding: 0.2em;
+}
+
+
+#contentContainer > li > .toolbar .toggled {
+  background-color: #af0;
+}
+  </style>
+{% endblock %}
+
+{% block javascripts %}
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+  <script type="text/javascript" src="{{ m.bAsset('js/klient.js') }}"></script>
+
+<script type="text/javascript">
+
+
+jQuery(document).ready(function() {
+
+	var slideData = JSON.parse(jQuery('#content').val());
+
+	dakSlideshowEditor.init(slideData, {
+		"form" : "slideForm",
+		"content" : "content"
+	});
+
+	//dakSlideshowEditor.addSlide();
+});
+
+</script>
+
+{% endblock %}
 
 {% block body %}
 <h1>SlideSource edit</h1>
 
-<form class="slideForm" action="{{ path('slidesource_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+<form class="slideForm" id="slideForm" action="{{ path('slidesource_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
 
     {{ form_errors(edit_form) }}
 
 	<table>
       {{ f.form_row(edit_form.name) }}
-	  {{ f.form_row(edit_form.content, null, {'cols': 90, 'rows': 12}) }}
-      {{ f.form_row(edit_form.extraCss, "Extra CSS", {'cols': 90, 'rows': 12}) }}
+	  {# f.form_row(edit_form.content, null, {'cols': 90, 'rows': 12}) #}
+      {# f.form_row(edit_form.extraCss, "Extra CSS", {'cols': 90, 'rows': 12}) #}
 	</table>
 
+    <label for="defaultSlideDuration">Default slide duration: <input type="text" id="defaultSlideDuration" /></label><br />
+
+   <button type="button" id="addSlide">Add raw slide</button>
+   <button type="button" id="minimiseMaximiseAll">Minimise all</button>
+
+   <ol id="contentContainer"></ol>
+
+    {{ form_widget(edit_form.content, {'id': 'content'}) }}
     {{ form_rest(edit_form) }}
     <p>
         <button type="submit">Edit</button>

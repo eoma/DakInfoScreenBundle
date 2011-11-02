@@ -1,0 +1,5 @@
+
+{% macro bAsset(relativeUrl) %}
+{% set relativeUrl = 'bundles/dakinfoscreen/' ~ relativeUrl %}
+{{ asset(relativeUrl) }}
+{% endmacro %}

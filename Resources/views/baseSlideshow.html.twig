@@ -1,10 +1,4 @@
-
-{% macro bAsset(relativeUrl) %}
-{% set relativeUrl = 'bundles/dakinfoscreen/' ~ relativeUrl %}
-{{ asset(relativeUrl) }}
-{% endmacro %}
-
-{# import 'DakInfoScreenBundle::macros.twig' as m #}
+{% import 'DakInfoScreenBundle::macros.html.twig' as m %}
 
 
 <!DOCTYPE html>
@@ -20,7 +14,7 @@
   <!-- *********************************************************************** -->
 
   <!-- Default Style -->
-  <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('css/default.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ m.bAsset('css/default.css') }}" />
 
   <!-- Your Style -->
   <!-- Define the style of you presentation -->
@@ -28,35 +22,66 @@
   <!-- Maybe a font from http://www.google.com/webfonts ? -->
   <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
 
-  <link rel="stylesheet" type="text/css" href="{{ _self.bAsset('css/style.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ m.bAsset('css/style.css') }}" />
+
+  {% for moduleName, module in slideModules %}
+    {% for stylesheet in module.style %}
+      <link rel="stylesheet" type="text/css" href="{{ asset(module.directory ~ '/' ~ stylesheet) }}" />
+    {% endfor %}
+  {% endfor %}
+
+  <style type="text/css">
+
+  {% for slide in slideData.slides %}
+
+   {{ slide.css | raw }}
+
+  {% endfor %}
+
+  </style>
+ </head>
+ <body id="slides" data-default-slide-duration="{{ slideData.defaultSlideDuration }}" class="{{ screenType | default() }}" data-scaling-allowed="{{ scalingAllowed | default('true') }}">
+  <!-- Your Slides -->
+  <!-- One section is one slide -->
+
+  {% for slide in slideData.slides %}
+
+   {{ slide.content | raw }}
+
+  {% else %}
+
+   <section>
+    <h1>Example slide.</h1>
+    <h2>Please put up some slides :)</h2>
+   </section>
+
+  {% endfor %}
+
+  {% if testRun|default(false) %}
+    <div class="dakInfoScreenTestRun">
+      <span>This is just a test run! <br />Please use the assigned screen.</span>
+    </div>
+  {% endif %}
+
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script type="text/javascript" src="{{ _self.bAsset('js/jquery.tmpl.min.js') }}"></script>
+  <script type="text/javascript" src="{{ m.bAsset('js/jquery.tmpl.min.js') }}"></script>
 
-  <script type="text/javascript" src="{{ _self.bAsset('js/controls.js') }}"></script>
-  <script type="text/javascript" src="{{ _self.bAsset('js/slideControls.js') }}"></script>
+  <script type="text/javascript" src="{{ m.bAsset('js/controls.js') }}"></script>
+  <script type="text/javascript" src="{{ m.bAsset('js/slideControls.js') }}"></script>
 
   <!-- Extra modules -->
 
   {% for moduleName, module in slideModules %}
-    <!-- start include module {{ moduleName }} -->
-
-    {% for stylesheet in module.style %}
-      <link rel="stylesheet" type="text/css" href="{{ asset(module.directory ~ '/' ~ stylesheet) }}" />
-    {% endfor %}
     {% for script in module.script %}
       <script type="text/javascript" src="{{ asset(module.directory ~ '/' ~ script) }}"></script>
     {% endfor %}
-
-    <!-- end include module {{ moduleName }} -->
   {% endfor %}
 
   <script type="text/javascript">
    var checkReloadUrl = "{{ checkReloadUrl|default() }}";
 
-   //slideControl.registerModule(eventCollection);
    {% for moduleName, module in slideModules %}
-
      {% if module.reference %}
        slideControl.registerModule({{ module.reference }})
      {% else %}
@@ -66,27 +91,6 @@
 
   </script>
 
-  <script type="text/javascript" src="{{ _self.bAsset('js/app.js') }}"></script>
-
-  <style type="text/css">{{ extraCss | default() | raw }}</style>
- </head>
- <body id="slides" data-default-slide-duration="5000" class="{{ screenType | default() }}" data-scaling-allowed="{{ scalingAllowed | default('true') }}">
-  <!-- Your Slides -->
-  <!-- One section is one slide -->
-
-  {% block slides %}
-
-   <section>
-    <h1>Example slide.</h1>
-    <h2>Please put up a slide :)</h2>
-   </section>
-
-  {% endblock %}
-
-  {% if testRun|default(false) %}
-    <div class="dakInfoScreenTestRun">
-      <span>This is just a test run! <br />Please use the assigned screen.</span>
-    </div>
-  {% endif %}
+  <script type="text/javascript" src="{{m.bAsset('js/app.js') }}"></script>
  </body>
 </html>
