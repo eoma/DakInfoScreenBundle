@@ -101,7 +101,7 @@ var dakSlideshowEditor = function () {
 			newSlides.slides[i].css = slides[i].module.getRawCss();
 		}
 
-		var jsonSlide = JSON.stringify(slides);
+		var jsonSlide = JSON.stringify(newSlides);
 		console.log(jsonSlide);
 
 		form.find('#' + config.content).val(jsonSlide);
