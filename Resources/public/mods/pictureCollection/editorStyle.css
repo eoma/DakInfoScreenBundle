@@ -1,0 +1,26 @@
+
+.pictureCollectionEditor .canvas ul > li {
+	height: 150px;
+	width: 150px;
+	border: 2px solid #000;
+	margin: 10px;
+	float: left;
+	position: relative;
+}
+
+.pictureCollectionEditor .canvas ul > li img {
+	max-height: 150px;
+	max-width: 150px;
+}
+
+.pictureCollectionEditor .canvas ul > li a.delete {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: #fff;
+}
+
+.pictureCollectionEditor .canvas ul > li a.delete:hover {
+	background-color: #aaa;
+	cursor: pointer;
+}
