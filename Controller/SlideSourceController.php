@@ -95,6 +95,7 @@ class SlideSourceController extends Controller
         $form   = $this->createForm(new SlideSourceType(), $entity);
 
         return array(
+            'slideModules' => $this->get('dak_info_screen.module_manager')->getModules(),
             'entity' => $entity,
             'form'   => $form->createView()
         );
@@ -149,6 +150,7 @@ class SlideSourceController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
+            'slideModules' => $this->get('dak_info_screen.module_manager')->getModules(),
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
