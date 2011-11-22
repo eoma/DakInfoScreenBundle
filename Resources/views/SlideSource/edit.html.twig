@@ -7,6 +7,14 @@
 {% block stylesheets %}
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" />
 
+{% for moduleName, module in slideModules %}
+  {% if module.editor.style is defined %}
+    {% for s in module.editor.style %}
+      <link rel="stylesheet" href="{{ asset(module.directory ~ '/' ~ s) }}" />
+	{% endfor %}
+  {% endif %}
+{% endfor %}
+
 <style type="text/css">
 
 /* clearfix */
@@ -67,10 +75,17 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 
-  <script type="text/javascript" src="{{ m.bAsset('js/klient.js') }}"></script>
+  <script type="text/javascript" src="{{ m.bAsset('js/editor.js') }}"></script>
+
+{% for moduleName, module in slideModules %}
+  {% if module.editor.script is defined %}
+    {% for s in module.editor.script %}
+      <script type="text/javascript" src="{{ asset(module.directory ~ '/' ~ s) }}" ></script>
+	{% endfor %}
+  {% endif %}
+{% endfor %}
 
 <script type="text/javascript">
-
 
 jQuery(document).ready(function() {
 
@@ -103,7 +118,7 @@ jQuery(document).ready(function() {
 
     <label for="defaultSlideDuration">Default slide duration: <input type="text" id="defaultSlideDuration" /></label><br />
 
-   <button type="button" id="addSlide">Add raw slide</button>
+   <ul id="newSlideButtons"></ul>
    <button type="button" id="minimiseMaximiseAll">Minimise all</button>
 
    <ol id="contentContainer"></ol>
@@ -111,6 +126,7 @@ jQuery(document).ready(function() {
     {{ form_widget(edit_form.content, {'id': 'content'}) }}
     {{ form_rest(edit_form) }}
     <p>
+		<label>do not update<input type="checkbox" id="doNotUpdate" /></label>
         <button type="submit">Edit</button>
     </p>
 </form>
