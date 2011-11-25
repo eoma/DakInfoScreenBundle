@@ -40,7 +40,7 @@
 
   </style>
  </head>
- <body id="slides" data-default-slide-duration="{{ slideData.defaultSlideDuration }}" class="{{ screenType | default() }}" data-scaling-allowed="{{ scalingAllowed | default('true') }}">
+ <body id="slides" data-default-slide-duration="{{ slideData.defaultSlideDuration | default(5000) }}" class="{{ screenType | default() }}" data-scaling-allowed="{{ scalingAllowed | default('true') }}">
   <!-- Your Slides -->
   <!-- One section is one slide -->
 
@@ -64,7 +64,7 @@
   {% endif %}
 
 
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="{{ m.bAsset('js/jquery.tmpl.min.js') }}"></script>
 
   <script type="text/javascript" src="{{ m.bAsset('js/controls.js') }}"></script>
