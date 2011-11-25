@@ -182,7 +182,7 @@ var eventApp;
 			});
 
 			if ((typeof putAfterElement != 'undefined') && (putAfterElement != null)) {
-				putAfterElement.after($.tmpl(eventCollectionFormat, dateEvents));
+				$.tmpl(eventCollectionFormat, dateEvents).insertAfter(putAfterElement);
 			}
 			
 			dates = null;
