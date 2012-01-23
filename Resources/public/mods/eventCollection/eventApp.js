@@ -1,4 +1,4 @@
-var eventCollectionFormat = "<section class=\"eventCollection\"> \
+var eventCollectionFormat = "<section class=\"eventCollection eventStyle\"> \
  <h1>${formatDate(date)}</h1> \
  <div class=\"eventsInCollection\"> \
   {{tmpl(events) eventFormat}} \
