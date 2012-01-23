@@ -32,9 +32,7 @@ $(document).ready(function () {
 
 		idx = 0;
 
-		function cycleControl () {
-			slideControl.initializeModules();
-
+		function startCycle () {
 			scanForSlides();
 			setSlide();
 			slideControl.init();
@@ -44,7 +42,11 @@ $(document).ready(function () {
 			} else {
 				slideControl.completeCycle(cycleControl);
 			}
-		}
+		};
+
+		function cycleControl () {
+			slideControl.initializeModules(startCycle);
+		};
 
 		cycleControl();
 	}

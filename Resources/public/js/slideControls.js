@@ -36,15 +36,29 @@ var slideControl = {
 		}
 	},
 
-	initializeModules : function () {
+	initializeModules : function (callbackWhenFinished) {
 		var t = this;
 
-		for (var i = 0, len = t.modules.length; i < len; i++) {
-			if (jQuery.isFunction(t.modules[i].initialize)) {
-				t.modules[i].initialize();
+		var i = 0;
+		var len = t.modules.length;
+
+		function iterateAndInitializeModules () {
+			if (i < len) {
+				var mod = t.modules[i];
+				i++;
+
+				console.log("Initializes module " + mod.getName());
+				if (jQuery.isFunction(mod.initialize)) {
+					mod.initialize(iterateAndInitializeModules);
+				} else {
+					iterateAndInitializeModules();
+				}
+			} else {
+				callbackWhenFinished();
 			}
 		}
 
+		iterateAndInitializeModules();
 	},
 
 	identifySlide : function () {
