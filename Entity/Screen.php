@@ -49,6 +49,7 @@ class Screen
      * @var object $slideSource
      *
      * @ORM\ManyToOne(targetEntity="SlideSource", inversedBy="screens")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
 	private $slideSource;
 
@@ -102,8 +103,13 @@ class Screen
     {
 		return $this->slideSource;
 	}
+	
+	public function hasSlideSource()
+	{
+		return !($this->slideSource === null);
+	}
 
-	public function setSlideSource(SlideSource $slideSource)
+	public function setSlideSource(SlideSource $slideSource = null)
     {
 		$this->slideSource = $slideSource;
 	}

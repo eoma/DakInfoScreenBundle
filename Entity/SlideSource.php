@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class SlideSource
 {
@@ -142,4 +143,13 @@ class SlideSource
     {
         return $this->screens;
     }
+    
+    /**
+     * @ORM\PreRemove
+     */
+    public function preRemove() {
+		foreach ($this->getScreens() as $s) {
+			$s->setSlideSource(null);
+		}
+	}
 }
