@@ -23,6 +23,7 @@
         <tr>
             <td><a href="{{ path('screen_edit', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
             <td>{{ entity.description }}</td>
+            {% if entity.hasSlideSource %}
             <td><a href="{{ path('slidesource_show', {'id' : entity.slideSource.id }) }}">{{ entity.slideSource }}</a></td>
             <td>
                 <ul>
@@ -31,6 +32,9 @@
                     </li>
                 </ul>
             </td>
+            {% else %}
+            <td colspan="2">No slideshpw associated with this screen!</td>
+            {% endif %}
         </tr>
     {% endfor %}
     </tbody>
