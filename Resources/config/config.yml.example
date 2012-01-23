@@ -18,4 +18,4 @@ dak_info_screen:
         eventCollection:
             directory: bundles/dakinfoscreen/mods/eventCollection #relative to the web root
             style: [style.css]
-            script: [eventApp.js, eventCollection.js]
+            script: [tools.js, eventQuery.js, eventApp.js, eventCollection.js]
