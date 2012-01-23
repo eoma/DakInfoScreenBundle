@@ -25,7 +25,7 @@ var dummy = {
 	 * This method will be called at the start of a slideshow. Ie. right
 	 * before it starts a new cycle.
 	 */
-	initialize : function () {
+	initialize : function (callbackWhenFinished) {
 		var t = this;
 
 		if ( ! t.initialized ) {
@@ -35,6 +35,8 @@ var dummy = {
 			
 			t.initialized = true;
 		}
+
+		callbackWhenFinished();
 	},
 
 	/**

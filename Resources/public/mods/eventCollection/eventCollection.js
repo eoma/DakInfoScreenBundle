@@ -8,9 +8,11 @@ var eventCollection = {
 	slideRuns : 0,
 	eventSlideTriggerExists : false,
 
-	initialize : function () {
+	initialize : function (callbackWhenFinished) {
 		var t = this;
 		// To be used at every start of a new slide cycle.
+
+		var triggerCallbackManually = true;
 
 		if ( ! t.initialized ) {
 			t.initialized = true;
@@ -22,25 +24,31 @@ var eventCollection = {
 			eventApp.state.filter.onlySummaries = 1;
 
 			if ($('.eventSlideTrigger').length > 0) {
-				eventApp.refresh(null, false);
+				eventApp.refresh(callbackWhenFinished, true);
+				triggerCallbackManually = false;
+				
 				t.eventSlideTriggerExists = true;
-			} else {
-				return false;
 			}
 		} else {
 
 			console.log("t.eventSlideTriggerExists", t.eventSlideTriggerExists);
 
-			if ( ! t.eventSlideTriggerExists ) return false;
+			if ( t.eventSlideTriggerExists ) {
 
-			if (t.slideRuns > 1) {
-				t.slideRuns = 0;
+				if (t.slideRuns > 1) {
+					t.slideRuns = 0;
 
-				console.log("Will refresh events");
-				eventApp.refresh(null, false);
+					console.log("Will refresh events");
+					eventApp.refresh(callbackWhenFinished, true);
+					triggerCallbackManually = false;
+				}
+
+				t.slideRuns++;
 			}
+		}
 
-			t.slideRuns++;
+		if (triggerCallbackManually) {
+			callbackWhenFinished();
 		}
 	},
 
@@ -112,7 +120,7 @@ var eventCollection = {
 
 		//console.log(t.currentEvent);
 
-		if (previousEvent == null) {
+		if (previousEvent === null) {
 			//console.log('no previous event');
 			t.currentEvent.article.attr('aria-selected', true);
 			t.currentEvent.ribbon.attr('aria-selected', true);
