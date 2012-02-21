@@ -132,6 +132,7 @@ class ScreenController extends Controller
 
 		$response = array(
             'reload' => false,
+            'reloadNow' => false,
         );
 
         if (!$screen) {
@@ -141,8 +142,13 @@ class ScreenController extends Controller
         $screenUpdatedAt = $screen->getUpdatedAt()->getTimestamp();
         $slideSourceUpdatedAt = $screen->getSlideSource()->getUpdatedAt()->getTimestamp();
 
-        if (($currentInstanceTimestamp < $forceReloadTimestamp) || ($currentInstanceTimestamp < $screenUpdatedAt) || ($currentInstanceTimestamp < $slideSourceUpdatedAt)) {
+        if ($currentInstanceTimestamp < $slideSourceUpdatedAt) {
             $response['reload'] = true;
+        }
+
+        if ($currentInstanceTimestamp < $forceReloadTimestamp) {
+            $response['reload'] = true;
+            $response['reloadNow'] = true;
         }
 
         return new Response(json_encode($response));
