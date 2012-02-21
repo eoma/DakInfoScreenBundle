@@ -2,28 +2,9 @@
  * This file must be loaded last.
  */
 
-function mustReload () {
+"use strict";
 
-	var reload = false;
-
-	$.ajax(checkReloadUrl, {
-		async: false,
-		cache: false,
-		dataType: 'json',
-		success : function (data) {
-
-			console.log('data.reload', data.reload);
-
-			if (data.reload) {
-				reload = true;
-			}
-		}
-	});
-
-	console.log('must reload returns:', reload);
-
-	return reload;
-}
+var reloadControl = {};
 
 $(document).ready(function () {
 
@@ -37,8 +18,8 @@ $(document).ready(function () {
 			setSlide();
 			slideControl.init();
 
-			if ((checkReloadUrl.length > 0) && mustReload()) {
-				location.replace(location.href.split('#')[0]);
+			if (reloadControl.mustReload()) {
+				reloadControl.reloadPage();
 			} else {
 				slideControl.completeCycle(cycleControl);
 			}
@@ -51,4 +32,51 @@ $(document).ready(function () {
 		cycleControl();
 	}
 });
+
+reloadControl = function(){
+
+	var reload = false;
+
+	var reloadPage = function() {
+		location.replace(location.href.split('#')[0]);
+	}
+
+	var checkResult = function(data) {
+		console.log('data.reload', data.reload);
+
+		if (data.reload) {
+			reload = true;
+		}
+
+		if (data.reloadNow) {
+			reloadPage();
+		}
+	}
+
+	var pollServer = function () {
+		if ( (typeof checkReloadUrl === "string") && (checkReloadUrl.length > 0) ) {
+			$.ajax(checkReloadUrl, {
+				cache: false,
+				dataType: 'json',
+				success : checkResult,
+			});
+		}
+	}
+
+	var startCycle = function() {
+		pollServer();
+		setTimeout(startCycle, 10 * 1000); // Execute every 10th second.
+	};
+
+	var mustReload = function() {
+		return reload;
+	};
+
+	startCycle();
+
+	return {
+		reloadPage : reloadPage,
+		mustReload : mustReload,
+	};
+}();
 
