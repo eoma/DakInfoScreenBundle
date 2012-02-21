@@ -12,6 +12,7 @@ body {
 	margin-left: -400px; margin-top: -300px;
 	position: absolute; top: 50%; left: 50%;
 	overflow: hidden;
+	cursor: none;
 }
 
 body.vertical {
