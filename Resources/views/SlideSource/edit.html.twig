@@ -77,15 +77,19 @@
 
   <script type="text/javascript" src="{{ m.bAsset('js/editor.js') }}"></script>
 
-{% for moduleName, module in slideModules %}
-  {% if module.editor.script is defined %}
-    {% for s in module.editor.script %}
-      <script type="text/javascript" src="{{ asset(module.directory ~ '/' ~ s) }}" ></script>
-	{% endfor %}
-  {% endif %}
+{% for moduleName, module in slideModules if module.editor.script is defined %}
+  {% for s in module.editor.script %}
+    <script type="text/javascript" src="{{ asset(module.directory ~ '/' ~ s) }}" ></script>
+  {% endfor %}
 {% endfor %}
 
 <script type="text/javascript">
+
+   var moduleUrl = {
+   {% for moduleName, module in slideModules if module.editor.script is defined %}
+     "{{ moduleName }}" : "{{ asset(module.directory ~ '/') }}",
+   {% endfor %}   
+   };
 
 jQuery(document).ready(function() {
 

@@ -7,12 +7,6 @@
   <meta charset="utf-8">
   <title>{% block title %}The Title Of Your Presentation{% endblock %}</title>
 
-  <!-- *****************  DZSlides CORE 2.0b1 *************************** -->
-  <!-- *********************************************************************** -->
-  <!-- *********************************************************************** -->
-  <!-- *********************************************************************** -->
-  <!-- *********************************************************************** -->
-
   <!-- Default Style -->
   <link rel="stylesheet" type="text/css" href="{{ m.bAsset('css/default.css') }}" />
 
@@ -80,6 +74,12 @@
 
   <script type="text/javascript">
    var checkReloadUrl = "{{ checkReloadUrl|default() }}";
+
+   var moduleUrl = {
+   {% for moduleName, module in slideModules %}
+     "{{ moduleName }}" : "{{ asset(module.directory ~ '/') }}",
+   {% endfor %}   
+   };
 
    {% for moduleName, module in slideModules %}
      {% if module.reference %}
