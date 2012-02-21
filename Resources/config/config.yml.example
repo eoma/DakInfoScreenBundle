@@ -15,7 +15,3 @@ dak_info_screen:
             directory: bundles/dakinfoscreen/mods/dummy #relative to the web root
             style: [style.css]
             script: [dummy.js]
-        eventCollection:
-            directory: bundles/dakinfoscreen/mods/eventCollection #relative to the web root
-            style: [style.css]
-            script: [tools.js, eventQuery.js, eventApp.js, eventCollection.js]
