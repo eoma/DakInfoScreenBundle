@@ -134,6 +134,7 @@ var slideControl = {
 				if (moduleCycleResponse == true) {
 					goToNextSlide = false;
 				} else if (typeof moduleCycleResponse == 'number') {
+					goToNextSlide = false;
 					possibleDuration = moduleCycleResponse;
 				}
 			}
