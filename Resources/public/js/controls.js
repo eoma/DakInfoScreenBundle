@@ -1,6 +1,8 @@
+"use strict";
+
   var friendWindows = [];
   var idx = 1;
-  var slides;
+  var slides = null;
   var obeyOnresize = true;
 
   /* main() */

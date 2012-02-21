@@ -1,3 +1,5 @@
+"use strict";
+
 var slideControl = {
 	currentSlide : null,
 	defaultSlideDuration : 5000,
@@ -92,8 +94,6 @@ var slideControl = {
 		
 		t.identifySlide();
 	},
-
-
 
 	completeCycle : function (callbackWhenFinished) {
 		var t = this;

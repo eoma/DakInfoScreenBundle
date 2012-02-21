@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * This object is responsible for initialising
