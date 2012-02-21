@@ -29,6 +29,21 @@ body.s1024x768.vertical {
 	margin-left: -384px; margin-top: -512px;
 }
 
+body.s1280x720 {
+	width: 1280px; height: 720px;
+	margin-left: -640px; margin-top: -360px;
+}
+
+body.s1280x720.vertical {
+	width: 720px; height: 1280px;
+	margin-left: -360px; margin-top: -640px;
+}
+
+body.s1600x900.vertical {
+	width: 900px; height: 1600px;
+	margin-left: -450px; margin-top: -800px;
+}
+
 body.s1600x900 {
 	width: 1600px; height: 900px;
 	margin-left: -800px; margin-top: -450px;
