@@ -19,48 +19,7 @@ var pictureCollection = {
 			var images = jQuery(".pictureCollection > img");
 
 			if(images.length > 0) {
-
-				var bodyHeight = parseInt($('body').css('height').replace('px', ''), 10);
-				var bodyWidth = parseInt($('body').css('width').replace('px', ''), 10);
-
-				var bodyRatio = bodyHeight / bodyWidth;
-
-				console.log('bodyRatio', bodyRatio);
-
-				for (var i = 0; i < images.length; i++) {
-					var image = images.eq(i);
-					var imageHeight = parseInt(image.css('height').replace('px', ''), 10);
-					var imageWidth = parseInt(image.css('width').replace('px', ''), 10);
-
-					console.log('imageWidth', imageWidth, 'imageHeight', imageHeight);
-
-					var imageRatio = imageHeight / imageWidth;
-
-					var height = 0;
-					var width = 0;
-
-					if (imageRatio > bodyRatio) {
-						// The transform image's width must be shrinked
-						height = bodyHeight;
-						width = bodyWidth * bodyRatio / imageRatio;
-					} else if (imageRatio < bodyRatio) {
-						// The transform image's height must be shrinked
-						width = bodyWidth;
-						height = bodyHeight * imageRatio / bodyRatio;
-					} else {
-						height = bodyHeight;
-						width = bodyWidth;
-					}
-
-					image.css({height: height + 'px', width: width + 'px'});
-
-					image.css({
-						top: ((bodyHeight - height) / 2) + 'px',
-						left: ((bodyWidth - width) / 2) + 'px'
-					});
-
-					image = null;
-				}
+				t.resizeImages(images);
 
 				images = null;
 			}
@@ -72,6 +31,62 @@ var pictureCollection = {
 			callbackWhenFinished();
 		}
 	},
+
+	resizeImages : function (images) {
+		var t = this;
+
+		var bodyHeight = parseInt($('body').css('height').replace('px', ''), 10);
+		var bodyWidth = parseInt($('body').css('width').replace('px', ''), 10);
+
+		var bodyRatio = bodyHeight / bodyWidth;
+
+		console.log('bodyRatio', bodyRatio);
+
+		function resizeAndPadImage () {
+			var image = $(this);
+
+			if (typeof (image.data('isResized')) === "undefined") {
+				var imageHeight = parseInt(image.css('height').replace('px', ''), 10);
+				var imageWidth = parseInt(image.css('width').replace('px', ''), 10);
+
+				console.log('imageWidth', imageWidth, 'imageHeight', imageHeight);
+
+				var imageRatio = imageHeight / imageWidth;
+
+				var height = 0;
+				var width = 0;
+
+				if (imageRatio > bodyRatio) {
+					// The transform image's width must be shrinked
+					height = bodyHeight;
+					width = bodyWidth * bodyRatio / imageRatio;
+				} else if (imageRatio < bodyRatio) {
+					// The transform image's height must be shrinked
+					width = bodyWidth;
+					height = bodyHeight * imageRatio / bodyRatio;
+				} else {
+					height = bodyHeight;
+					width = bodyWidth;
+				}
+
+				image.css({height: height + 'px', width: width + 'px'});
+
+				image.css({
+					top: ((bodyHeight - height) / 2) + 'px',
+					left: ((bodyWidth - width) / 2) + 'px'
+				});
+
+				image.data("isResized", true);
+			}
+
+			image = null;
+		}
+
+		images.each(resizeAndPadImage);
+
+		images = null;
+	},
+
 
 	identifySlide : function (slide) {
 		var t = this;
@@ -116,7 +131,9 @@ var pictureCollection = {
 	unbind : function () {
 		var t = this;
 
-		t.activeImage.removeAttr('aria-selected');
+		if (t.activeImage !== null) {
+			t.activeImage.removeAttr('aria-selected');
+		}
 
 		t.slide = null;
 		t.activeImage = null;
