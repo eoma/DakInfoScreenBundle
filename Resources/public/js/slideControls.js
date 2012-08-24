@@ -134,8 +134,12 @@ var slideControl = {
 				if (moduleCycleResponse == true) {
 					goToNextSlide = false;
 				} else if (typeof moduleCycleResponse == 'number') {
-					goToNextSlide = false;
-					possibleDuration = moduleCycleResponse;
+					if (moduleCycleResponse > 0) {
+						goToNextSlide = false;
+						possibleDuration = moduleCycleResponse;
+					} else {
+						console.log(t.modules[t.activeModule].getName() +": cycle returned negative number!");
+					}
 				}
 			}
 
