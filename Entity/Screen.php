@@ -25,7 +25,6 @@ class Screen
     /**
      * @var string $name
      *
-     * @Gedmo\Sluggable(slugField="slug")
      * @ORM\Column(name="name", type="string", length=255, unique=TRUE)
      */
     private $name;
@@ -33,7 +32,7 @@ class Screen
     /**
      * @var string $slug
      *
-     * @Gedmo\Slug
+     * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(name="slug", type="string", length=255, unique=TRUE)
      */
     private $slug;

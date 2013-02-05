@@ -1,0 +1,15 @@
+{
+	"name": "Dak/InfoScreenBundle",
+	"type": "symfony-bundle",
+	"description": "Information screen, digital signage",
+	"homepage": "http://github.com/eoma/DakInfoScreenBundle",
+	"require": {
+		"php": ">= 5.3.2",
+        "symfony/symfony": "2.2.*",
+        "doctrine/orm": ">=2.2.3,<2.4-dev",
+        "doctrine/doctrine-bundle": "1.2.*",
+		"doctrine/doctrine-fixtures-bundle": "dev-master",
+		"gedmo/doctrine-extensions": "2.3.*",
+		"stof/doctrine-extensions-bundle": "dev-master"
+	}
+}
