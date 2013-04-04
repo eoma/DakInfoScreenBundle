@@ -26,7 +26,7 @@ class ScreenController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('DakInfoScreenBundle:Screen')->findAll();
 		$forceReload = $em->getRepository('DakInfoScreenBundle:Settings')->findOneBy(array('name' => 'forceScreenReload'));
@@ -46,7 +46,7 @@ class ScreenController extends Controller
      */
     public function showAction($id = 0, $slug = null)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
 		$slug = trim($slug);
 
@@ -78,7 +78,7 @@ class ScreenController extends Controller
      */
     public function runAction($id = 0, $slug = null)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
 		$slug = trim($slug);
 
@@ -119,7 +119,7 @@ class ScreenController extends Controller
     public function reloadAction($id, $currentInstanceTimestamp)
     {
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $screen = $em->getRepository('DakInfoScreenBundle:Screen')->find($id);
 		$forceReload = $em->getRepository('DakInfoScreenBundle:Settings')->findOneBy(array('name' => 'forceScreenReload'));
@@ -162,7 +162,7 @@ class ScreenController extends Controller
     public function forceReloadAction()
     {
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
 		$forceReload = $em->getRepository('DakInfoScreenBundle:Settings')->findOneBy(array('name' => 'forceScreenReload'));
 
@@ -207,7 +207,7 @@ class ScreenController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
@@ -229,7 +229,7 @@ class ScreenController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DakInfoScreenBundle:Screen')->find($id);
 
@@ -256,7 +256,7 @@ class ScreenController extends Controller
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DakInfoScreenBundle:Screen')->find($id);
 
@@ -299,7 +299,7 @@ class ScreenController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('DakInfoScreenBundle:Screen')->find($id);
 
             if (!$entity) {

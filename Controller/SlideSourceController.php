@@ -24,7 +24,7 @@ class SlideSourceController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('DakInfoScreenBundle:SlideSource')->findAll();
 
@@ -39,7 +39,7 @@ class SlideSourceController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DakInfoScreenBundle:SlideSource')->find($id);
 
@@ -62,7 +62,7 @@ class SlideSourceController extends Controller
      */
     public function runAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DakInfoScreenBundle:SlideSource')->find($id);
 
@@ -93,6 +93,9 @@ class SlideSourceController extends Controller
     {
         $entity = new SlideSource();
         $form   = $this->createForm(new SlideSourceType(), $entity);
+        $logger = $this->get('logger');
+
+		$logger->info(print_r($this->get('dak_info_screen.module_manager')->getModules(), true));
 
         return array(
             'slideModules' => $this->get('dak_info_screen.module_manager')->getModules(),
@@ -116,7 +119,7 @@ class SlideSourceController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
@@ -138,7 +141,7 @@ class SlideSourceController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DakInfoScreenBundle:SlideSource')->find($id);
 
@@ -166,7 +169,7 @@ class SlideSourceController extends Controller
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DakInfoScreenBundle:SlideSource')->find($id);
 
@@ -209,7 +212,7 @@ class SlideSourceController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('DakInfoScreenBundle:SlideSource')->find($id);
 
             if (!$entity) {
