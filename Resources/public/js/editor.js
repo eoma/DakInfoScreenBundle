@@ -280,10 +280,10 @@ var dakSlideshowEditor = function () {
 			delay : 200,
 		});
 
-		contentContainer.find('.toolbar .delete').live('click', deleteSlide);
-		contentContainer.find('.toolbar .minimise').live('click', clickMinimiseMaximise);
+		contentContainer.on('click', '.toolbar .delete', deleteSlide);
+		contentContainer.on('click', '.toolbar .minimise', clickMinimiseMaximise);
 
-		jQuery('#minimiseMaximiseAll').live('click', clickMinimiseMaximiseAll);
+		jQuery('#minimiseMaximiseAll').on('click', clickMinimiseMaximiseAll);
 
 		for (var i = 0; i < slides.length; i++) {
 			var slideTemplate = addSlideTemplate();
