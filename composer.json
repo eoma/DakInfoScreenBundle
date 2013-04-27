@@ -11,5 +11,10 @@
 		"doctrine/doctrine-fixtures-bundle": "dev-master",
 		"gedmo/doctrine-extensions": "2.3.*",
 		"stof/doctrine-extensions-bundle": "dev-master"
+	},
+	"autoload": {
+        "dak-0": {
+		     "Dak\\InfoScreenBundle": ""
+		}
 	}
 }
